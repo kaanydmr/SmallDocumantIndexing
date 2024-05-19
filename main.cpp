@@ -18,7 +18,6 @@ std::string getAlphaWord(std::ifstream& file) {
         if (std::isalpha(ch)) {
             word += ch;
         } else if (!word.empty()) {
-            // Skip leading non-alphabetic characters
             if (std::isalpha(word[0])) {
                 return word;
             } else {
@@ -26,7 +25,6 @@ std::string getAlphaWord(std::ifstream& file) {
             }
         }
     }
-    // Skip leading non-alphabetic characters
     if (!word.empty() && std::isalpha(word[0])) {
         return word;
     }
@@ -48,14 +46,13 @@ int main() {
     vector<Node*> most10;
     cout << "Please wait program is running..." << endl;
     auto start = std::chrono::high_resolution_clock::now();
-    std::string path = "./AllDocs"; // The path to the directory with the text files
+    std::string path = "./AllDocs";
     DIR *dir;
     struct dirent *ent;
 
     if ((dir = opendir(path.c_str())) != nullptr) {
         while ((ent = readdir(dir)) != nullptr) {
             std::string filename = ent->d_name;
-            // Check if the file is a .txt file
             if (filename.size() > 4 && filename.substr(filename.size() - 4) == ".txt") {
                 std::ifstream file(path + "/" + filename);
                 if (!file) {
@@ -138,6 +135,7 @@ int main() {
                 break;
             case '4':
                 dictionary.clear();
+                cout << "Exiting..." << endl;
                 break;
             default:
 
