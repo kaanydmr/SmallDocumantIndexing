@@ -1,5 +1,5 @@
 #pragma once
-#include "CharNode.h"
+#include "TxtNode.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -56,6 +56,7 @@ public:
             cout << node->filenname << endl;
             node = node->next;
         }
+        cout << "These files are the word '" << this->word << "' occurred." << endl;
     }
 
 };
