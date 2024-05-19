@@ -11,6 +11,9 @@ WordList::WordList() {
     InitializeList();
 }
 
+//Creates a linked list with all of the alphabets characters
+//The chars are uppercase so it does not conflict with any of the words
+//All the uppercase char nodes' addresses are hold in array so reaching any word is easier by looking first letter
 void WordList::InitializeList(){
    for(int i = 0 ; i < 26; i++){
        char name = 'A' + i;
@@ -30,6 +33,7 @@ void WordList::InitializeList(){
    }
 }
 
+//Seaches the entered word
 Node* WordList::FindWord(const std::string &word) {
     char firstWord = word[0];
     int i;
@@ -58,6 +62,7 @@ bool CompareNodesLeast(Node* a, Node* b){
     return !CompareNodesTop(a, b);
 }
 
+//Adds the top 10 appearing words to vector
 void WordList::top10(std::vector<Node*>& top) const{
 
     Node* walk = this->head;
@@ -79,6 +84,7 @@ void WordList::top10(std::vector<Node*>& top) const{
     }
 }
 
+//Adds least occurring 10 words to the vector and if 10 words which occurred 1 time is all of the list stops the search
 void WordList::least10(std::vector<Node*>& top){
 
     Node* walk = this->head->next;
@@ -89,7 +95,7 @@ void WordList::least10(std::vector<Node*>& top){
         if(walk->HowMany() == 1)
             counter++;
 
-        if(top.size() < 10){ // If less than 10 words, simply add it to the list
+        if(top.size() < 10){ // If less than 10 words, add it to the list
 
             top.push_back(walk);
             std::sort(top.begin(), top.end(), CompareNodesLeast);
@@ -125,7 +131,7 @@ void WordList::AddWord(const std::string &word, const string& filename) {
     while(current != nullptr){
         if(current->word == word){
             current->Push(filename);
-            return; // Word already exists in the list, so we just return
+            return; // Word already exists in the list, so we just adds the text file name and return
         }
         current = current->next;
     }
@@ -136,6 +142,7 @@ void WordList::AddWord(const std::string &word, const string& filename) {
 
 }
 
+//Inserts the word inside linked list sorted(If word is knot it will go to 'K' node and inserts the node, if it reaches 'L' it stops
 Node * WordList::findinsert(Node* start, Node* end, const string& value){
     Node* Walk = start->next; // Start from the node after the marker
     Node* prev = start;
@@ -169,8 +176,6 @@ Node * WordList::findinsert(Node* start, Node* end, const string& value){
 WordList::~WordList() {
     clear();
 }
-
-
 
 void WordList::clear() {
     while (head != nullptr) {
